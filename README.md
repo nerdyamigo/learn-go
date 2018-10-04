@@ -14,3 +14,9 @@ How to declare a variable + initializing it in memory
 // here we init. a variable with data, go can infer the type
 name := "MyName"
 ```
+
+#### Just like in C Go starts the program whe it gets to the main function
+```golang
+func main() {
+// work inside here
+}
