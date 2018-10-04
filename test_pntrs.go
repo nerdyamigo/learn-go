@@ -8,5 +8,6 @@ import (
 func main() {
 	name := "Carlos"
 	pntr := &name
-	fmt.Println(pntr);
+	backToStr := *pntr
+	fmt.Println("Here is the pointer to the var: ",pntr," Here is the text from the pointer: ", backToStr);
 }

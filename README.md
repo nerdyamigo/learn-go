@@ -13,6 +13,8 @@ How to declare a variable + initializing it in memory
 ```golang
 // here we init. a variable with data, go can infer the type
 name := "MyName"
+// we can set the var without data and go will set it to 0 || "" | false
+var str string
 ```
 
 #### Just like in C Go starts the program whe it gets to the main function
