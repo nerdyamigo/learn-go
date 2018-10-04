@@ -31,4 +31,14 @@ type Car struct {
 	year int
 	owner string
 }
+
+// let's use this struct to init a new car
+fordFocus := {"Focus", 2013, "John Smith"}
 ```
+
+#### Methods
+Go isn’t an object-oriented (OO) language like C++, Java, Ruby and C#. It doesn’t have objects nor inheritance and
+thus, doesn’t have the many concepts associated with OO such as polymorphism and overloading.
+
+What Go does have is structs which can be associated with methods. Go also
+supports a simple method of composition
