@@ -20,3 +20,15 @@ name := "MyName"
 func main() {
 // work inside here
 }
+```
+
+#### Structs
+A struct is a piece of mempry that gets reserved to be used with data of
+diff. types, in go we define a struct like this:
+```golang
+type Car struct {
+	model string
+	year int
+	owner string
+}
+```
