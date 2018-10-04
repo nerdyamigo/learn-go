@@ -11,5 +11,6 @@ Also started using the [excercism.io](https://exercism.io/tracks/go) for Golang
 How to declare a variable + initializing it in memory
 
 ```golang
+// here we init. a variable with data, go can infer the type
 name := "MyName"
 ```
