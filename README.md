@@ -5,3 +5,11 @@ This is the current book I am using [The Little Go
 Book](https://www.openmymind.net/The-Little-Go-Book/)
 
 Also started using the [excercism.io](https://exercism.io/tracks/go) for Golang
+
+
+### Go Basics
+How to declare a variable + initializing it in memory
+
+```golang
+name := "MyName"
+```
