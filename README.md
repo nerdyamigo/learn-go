@@ -23,7 +23,7 @@ func main() {
 ```
 
 #### Structs
-A struct is a piece of mempry that gets reserved to be used with data of
+A struct is a piece of memory that gets reserved to be used with data of
 diff. types, in go we define a struct like this:
 ```golang
 type Car struct {
