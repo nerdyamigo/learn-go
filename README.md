@@ -88,6 +88,7 @@ func (p *Pokemon) Pokedex(){ // the method is named Pokedex
 #### What about constructors
 Structures do not have constructors instead, you create a function that returns
 an instance of the desired type
+
 ```golang
 // let's set up a method inside a struct and use it
 package mainpackage main
@@ -123,5 +124,16 @@ func NewPokemon(name string,typeP string, evolve bool) *Pokemon {
 }
 ``` 
 
+#### Maps, Arrays & Slices
+In Go arrays are fixed. Declaring an array requires we specify size, and once
+the size is specified it cannot grow
+```golang
+var originalPokedex [151]int // here we declared a specific size for our
+array(remeber arrays start from 0, so this array will be from 0-150)
+// Let's assing something to the array, this is a single assignment
+originalPokedex[0] = "Bulbasor"
 
+// Let's also assing multiple things at once
+originalPokedex := [3]string{"Bulbasor", "Ivysaur", "Venusaur"}
 
+```
