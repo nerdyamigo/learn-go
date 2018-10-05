@@ -70,19 +70,16 @@ import(
 
 func main() {
   bulbasor := &Pokemon{"Bulbasor", "Grass", true}
-	entry := Pokedex(bulbasor)
-	fmt.Println(entry)
-	
+	bulbasor.Pokedex()
 }
 
 type Pokemon struct {
 	Name string
 	Type string
-	Evolve boolean
+	Evolve bool
 }
 
-func Pokedex(p *Pokemon) {
-	sentence := fmt.Printf("<-- POKEDEX ENTRY -->\n Pokemon Name: %s\nPokemon
-Type: %d\nPokemon Evolved: %t\n")	
+func (p *Pokemon) Pokedex(){
+	fmt.Printf("<-- POKEDEX -->\nMy Name Is: %s\nMy Typing Is: %s\nI Evolve: %t\n", p.Name,p.Type,p.Evolve)
 }
 ``` 
