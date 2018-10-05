@@ -127,6 +127,7 @@ func NewPokemon(name string,typeP string, evolve bool) *Pokemon {
 #### Maps, Arrays & Slices
 In Go arrays are fixed. Declaring an array requires we specify size, and once
 the size is specified it cannot grow
+
 ```golang
 /*
 here we declared a specific size for our
@@ -138,5 +139,12 @@ originalPokedex[0] = "Bulbasor"
 
 // Let's also assing multiple things at once
 originalPokedex := [3]string{"Bulbasor", "Ivysaur", "Venusaur"}
-
+```
+#### Iterate through the array
+Just like in other languages we can use the length of the array using len and
+the range can be used to iterate over it
+```golang
+for index, value := range originalPokedex {
+// Do stuff here
+}
 ```
