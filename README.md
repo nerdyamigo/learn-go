@@ -72,14 +72,15 @@ func main() {
   bulbasor := &Pokemon{"Bulbasor", "Grass", true}
 	bulbasor.Pokedex()
 }
-
+// Here the struct is created with the 3 fields
 type Pokemon struct {
 	Name string
 	Type string
 	Evolve bool
 }
-
-func (p *Pokemon) Pokedex(){
+// here the method is created using a dereferencer operator, we'll be doing some
+modifications to the data later
+func (p *Pokemon) Pokedex(){ // the method is named Pokedex
 	fmt.Printf("<-- POKEDEX -->\nMy Name Is: %s\nMy Typing Is: %s\nI Evolve: %t\n", p.Name,p.Type,p.Evolve)
 }
 ``` 
