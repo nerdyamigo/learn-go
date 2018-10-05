@@ -140,7 +140,7 @@ originalPokedex[0] = "Bulbasor"
 // Let's also assing multiple things at once
 originalPokedex := [3]string{"Bulbasor", "Ivysaur", "Venusaur"}
 ```
-#### Iterate through the array
+### Iterate through the array
 Just like in other languages we can use the length of the array using len and
 the range can be used to iterate over it
 ```golang
@@ -148,3 +148,26 @@ for index, value := range originalPokedex {
 // Do stuff here
 }
 ```
+### Slices
+A slice is a lightweight structure that wraps and represents a portion of an
+array. Theere are a few ways to create a slice
+```golang
+/*
+ * The first way to create a slice is a variation on how we created the array
+ * earlier
+/*
+
+// unlike the array declaration we do not declare a length ahead of time
+originalPokedex := []int{"Bulbasor", "Ivysaur", "Venusaur"}
+// Let's create a slice using the make keyword
+originalPokedex := make([]int, 151) // slice with the lenght and capacity of 10
+// Here we use the make keyword because it allocates and initialized the slide
+// for us
+// you can get more specific and specify both length and capacity separetely
+// like so:
+originalPokedex := make([]int, 0, 151) // slice with the length of 0 but
+// capacity of 151
+
+
+```
+Let's talk about the difference between length  and capacity
