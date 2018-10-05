@@ -1,4 +1,4 @@
-[logo]: https://golang.org/doc/gopher/talks.png
+![alt text](https://golang.org/doc/gopher/talks.png)
 # Learning go using OpenSouce Books
 I have downloaded and installed golang using MacOS 
 
