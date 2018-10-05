@@ -128,8 +128,11 @@ func NewPokemon(name string,typeP string, evolve bool) *Pokemon {
 In Go arrays are fixed. Declaring an array requires we specify size, and once
 the size is specified it cannot grow
 ```golang
-var originalPokedex [151]int // here we declared a specific size for our
+/*
+here we declared a specific size for our
 array(remeber arrays start from 0, so this array will be from 0-150)
+*/
+var originalPokedex [151]int
 // Let's assing something to the array, this is a single assignment
 originalPokedex[0] = "Bulbasor"
 
