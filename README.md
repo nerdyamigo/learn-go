@@ -1,3 +1,4 @@
+[logo]: https://golang.org/doc/gopher/talks.png
 # Learning go using OpenSouce Books
 I have downloaded and installed golang using MacOS 
 
@@ -50,7 +51,8 @@ directions to the house
 So how do I define a pointer?
 ```golang
 name := "John"
-pointerToName := &name
+pointerToName := &name // here we saved a pointer into the pointerToName
+variable
 ```
 
 #### Methods
@@ -59,5 +61,28 @@ thus, doesn’t have the many concepts associated with OO such as polymorphism a
 
 What Go does have is structs which can be associated with methods. Go also
 supports a simple method of composition
+```golang
+// let's set up a method inside a struct and use it
+package main
+import(
+"fmt"
+)
 
+func main() {
+  bulbasor := &Pokemon{"Bulbasor", "Grass", true}
+	entry := Pokedex(bulbasor)
+	fmt.Println(entry)
+	
+}
 
+type Pokemon struct {
+	Name string
+	Type string
+	Evolve boolean
+}
+
+func Pokedex(p *Pokemon) {
+	sentence := fmt.Printf("<-- POKEDEX ENTRY -->\n Pokemon Name: %s\nPokemon
+Type: %d\nPokemon Evolved: %t\n")	
+}
+``` 
