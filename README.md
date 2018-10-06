@@ -170,4 +170,10 @@ originalPokedex := make([]int, 0, 151) // slice with the length of 0 but
 
 
 ```
-Let's talk about the difference between length  and capacity
+### Four ways to initialize a s slice
+```golang
+name := []string{"pikachu", "bulbasor", "charmeleon"}
+checks := make([]bool, 10)
+var name []string
+hp := make([]int, 0, 99)
+```
