@@ -155,7 +155,7 @@ array. Theere are a few ways to create a slice
 /*
  * The first way to create a slice is a variation on how we created the array
  * earlier
-/*
+*/
 
 // unlike the array declaration we do not declare a length ahead of time
 originalPokedex := []int{"Bulbasor", "Ivysaur", "Venusaur"}
