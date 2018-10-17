@@ -130,6 +130,15 @@ The result of
 charizard := new(Pokemon)
 // is the same as
 chariard := &Pokemon{}
+// which one to use? Most people use the latter when initializing data
+charizard := new(Pokemon)
+charizard.name = "Charizard"
+charizard.evolved = true
+// vs
+charizard := &Pokemon {
+	name: "Charizard",
+	evolved: true
+}
 ```
 
 #### Maps, Arrays & Slices
