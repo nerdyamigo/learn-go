@@ -123,6 +123,14 @@ func NewPokemon(name string,typeP string, evolve bool) *Pokemon {
 	}
 }
 ``` 
+###### Other ways of using "constructors" in go
+Like stated above Golng does not have constructors but it does posses a `new` keyword
+The result of 
+```golang
+charizard := new(Pokemon)
+// is the same as
+chariard := &Pokemon{}
+```
 
 #### Maps, Arrays & Slices
 In Go arrays are fixed. Declaring an array requires we specify size, and once

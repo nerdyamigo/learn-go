@@ -1,12 +1,13 @@
 package main
 import (
 	"fmt"
-	"runtime"
+	"strings"
 )
 
 func main() {
 	slicing()
 	slicing2()
+	slicing3()
 
 }
 
@@ -41,4 +42,8 @@ func slicing2() {
 
 }
 
-
+func slicing3() {
+	haystack := "the spice must flow"
+	str := strings.Index(haystack[5:], " ")
+	fmt.Println(str)
+}
