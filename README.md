@@ -25,6 +25,7 @@ func log(message string) {
 }
 // one return value, number 
 func add(a int, b int) int {
+	// this could have been written a bit different since params use the same type (a, b int)
 }
 // 2 return values number and boolean
 func power(name string) (int, bool) {
