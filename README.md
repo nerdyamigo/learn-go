@@ -17,6 +17,26 @@ name := "MyName"
 // we can set the var without data and go will set it to 0 || "" | false
 var str string
 ```
+### Function Declarations
+Functions can return multiple values, let's look at a few
+```golang
+// no return value
+func log(message string) {
+}
+// one return value, number 
+func add(a int, b int) int {
+}
+// 2 return values number and boolean
+func power(name string) (int, bool) {
+}
+```
+Sometimes you only care about one of the return values. In these cases, you assign the other values to `_`
+```golang
+_, exists := evolves("charizard")
+if exists == false {
+	// handle error here
+}
+```
 
 #### Just like in C Go starts the program whe it gets to the main function
 ```golang
