@@ -9,6 +9,10 @@ Also started using the [excercism.io](https://exercism.io/tracks/go) for Golang
 
 
 ### Go Basics
+Primitive types in Golang
+```golang
+// string, numeric type, bool, error
+```
 How to declare a variable + initializing it in memory
 
 ```golang
@@ -101,6 +105,7 @@ type Pokemon struct {
 }
 // here the method is created using a dereferencer operator, we'll be doing some
 modifications to the data later
+// here we create the Pokedex method on the Pokemon struct using the * 
 func (p *Pokemon) Pokedex(){ // the method is named Pokedex
 	fmt.Printf("<-- POKEDEX -->\nMy Name Is: %s\nMy Typing Is: %s\nI Evolve: %t\n", p.Name,p.Type,p.Evolve)
 }
@@ -159,6 +164,30 @@ charizard.evolved = true
 charizard := &Pokemon {
 	name: "Charizard",
 	evolved: true
+}
+```
+
+#### Fields of a Struct
+We can put anything inside a structure including a pointer to another struct or an array, functions or interfaces
+```golang
+// lets start with our pokemon struct but we will expand it this time
+type Pokemon struct {
+	Name string
+	HP int
+	Evolves bool
+	Pre-Evolution *Pokemon
+}
+// and now we initialize this
+charizard := &Pokemon{
+	Name: "Charizard",
+	HP: 500,
+	Evolves: false,
+	Pre-Evolution: &Pokemon {
+		Name: "Charmeleon",
+		HP: 300,
+		Evolves: true,
+		Pre-Evolution: nil // We all know this should be another pokemon lol 
+	},
 }
 ```
 
