@@ -50,14 +50,14 @@ func main() {
 A struct is a piece of memory that gets reserved to be used with data of
 diff. types, in go we define a struct like this:
 ```golang
-type Car struct {
-	model string
-	year int
-	owner string
+type Pokemon struct {
+	name string
+	HP int
+	Evolves bool
 }
 
 // let's use this struct to init a new car
-fordFocus := {"Focus", 2013, "John Smith"}
+Charizard  := {"Charizard", 400, true}
 ```
 #### Pointers
 A pointer is just an address in memory; it's the location of where to find the
@@ -205,8 +205,6 @@ originalPokedex := make([]int, 151) // slice with the lenght and capacity of 10
 // like so:
 originalPokedex := make([]int, 0, 151) // slice with the length of 0 but
 // capacity of 151
-
-
 ```
 ### Four ways to initialize a s slice
 ```golang
