@@ -190,6 +190,28 @@ charizard := &Pokemon{
 	},
 }
 ```
+##### Composition
+Go supports composition whichs is the act of including one structure into another
+```golang
+// lets create a mixin using composition
+type Animal struct {
+	Name string
+}
+func (p *Animal) Screech() {
+	fmt.Printf("SRRRRRRRKTTTT, %s\n", p.Animal)
+}
+
+type Pokemon struct {
+	*Animal
+	HP int
+}
+// let's use our struct:
+charizard := &Pokemon {
+	Animal: &Animal("Charizard"),
+	HP: 400,
+}
+charizard.Screech()
+```
 
 #### Maps, Arrays & Slices
 In Go arrays are fixed. Declaring an array requires we specify size, and once
