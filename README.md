@@ -367,3 +367,23 @@ another package, including the `shopping` package we need to `import` `shopping/
 
 When we name our package using the `package` keyword we provide a single value, when we import we specofy the complete path
 
+### Visibility
+Go uses a simple rule to define what types and functions are visible outside of a package. If the name of the type or function starts with an
+uppercase letter, it's visible. If it starts with a lowercase letter, it isn't. 
+This also applies to struc fields, it a struct field name starts with a lowercase, only code inside the same package will be able to access them.
+### Interfaces
+Interfaces define a contgract but no implementation
+```golang
+type Logger interface {
+	Log(message string)
+}
+```
+#### What purpose could interfaces have?
+Interfaces help decouple your code from specific implementations
+```golang
+type SqlLogger struct {...}
+type ConsoleLogger struct {...}
+type FileLogger struct {...}
+```
+
+`@TODO LOOK UP HOW TO IMPLEMENT AND HOW TO USE INTERFACES IN GO`
