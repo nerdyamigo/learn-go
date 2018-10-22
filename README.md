@@ -355,4 +355,15 @@ lookup := map[string]int {
 for key, value := range lookup {
 	// CODE GOES HERE
 }
+// this iteration is not in order it will return the value key pair in random order 
 ```
+### Packages
+In Go package names follow the direcotry structure of your Go workspace. If we were bullding a shopping system, we'd prpbably start with a package
+named `shopping` and put our source files in `$GOPATH/src/shopping/`
+
+We don't want to put everything inside this folder though, for example maybe we want to isolate some database logic inside its own folder. To achieve
+this we create a subfolder at `$GOPATH/src/shopping/db`. The package name of the files within this subfolder is simply `db`, but to access it from
+another package, including the `shopping` package we need to `import` `shopping/db`
+
+When we name our package using the `package` keyword we provide a single value, when we import we specofy the complete path
+
