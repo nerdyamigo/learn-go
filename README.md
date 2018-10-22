@@ -308,3 +308,51 @@ func main() {
 	fmt.Println(worst)
 }
 ```
+### MAPS
+Maps in Go are what other languages call hashtables or dictionaries, you define a key and a value, and can get, set and delete values from it
+Maps like slices are created using the `make` function
+```golang
+fun main() {
+	lookup := make(map[string][int])
+	lookup["charizard"] = 400
+	hp, exists := lookup["pikachu"]
+	
+	// prints 0, false
+	// 0 is the default value for an integer
+	fmt.Println(power, exists)
+	// to get the number of keys we can use len
+	total := len(lookup) // returns 1
+	// delete has no return, can be called on a non-existent key
+	delete(lookup, "goku")
+}
+```
+Maps grow dynamically. However we can supply a second argument to make to set an initial size
+```golang
+	lookup := make(map[string][int], 100)
+```
+If you have somne idea of how many keys your map will have, defining an initial size can help with performance.
+When you need a map as a field of structure you define as:
+```golang
+type Pokemon struct {
+	Name string
+	PartyPokemon map[string]*Pokemon
+}
+// lets initialize the above struct
+charizard := &Pokmeon {
+	Name: "Charizard",
+	PartyPokemon: make(map[string]*Pokemon),
+}
+
+charizard.PartyPokemon["bulbasour"] = ... // @TODO create or load pokemon
+
+// here's another way to create a map, like `make` this approach is specific to maps and arrays. We can declare as a composite literal:
+
+lookup := map[string]int {
+	"charizard": 400,
+	"bulasour": 200,
+}
+// we can then iterate over a map using a `for loop` combined with the `range` keyword
+for key, value := range lookup {
+	// CODE GOES HERE
+}
+```
