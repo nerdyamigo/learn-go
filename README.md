@@ -287,3 +287,24 @@ func extractNames (pokemons, []*Pokemons) []string {
 	return names
 }
 ```
+##### COPY
+Normally,  method that copies values from one array to another has 5 params, `source`, `sourceStart`, `count`, `destination`, `destinationStart`. With
+slice we only need two
+```golang
+import ( 
+	"fmt"
+	"math/rand"
+	"sort"
+)
+
+func main() {
+	scores = make([]int, 100)
+	for i := 0; i < 100; i++ {
+		scores[i] = int(rand.Int31n(1000))
+	}
+	sort.Ints(scores)
+	worsr := make([]int, 5)
+	copy(worst, scores[:5]
+	fmt.Println(worst)
+}
+```
