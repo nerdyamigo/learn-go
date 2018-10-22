@@ -463,3 +463,86 @@ func main() {
 }
 
 ```
+
+### Empty Interface & Conversions
+Go has an mepty interface with no methods `interface{}`. Since every type implements all 0 of the empty interface's methods, and since interfaces are
+implicitly implemented, every type fulfills the contract of the emtpy interface
+```golang
+// if we wanted to we could write an add function with the following signature
+func add(a interface{}, b interface{}, c interface{}) {
+	// code here
+}
+// To convert an interface variable to an explicit type user `.`
+return a.(int) + b.(int)
+```
+
+### Strings & Byte Arrays
+Strings and byte arrays are closely related. We can convert one to another
+```golang
+stra := "the spice must flow"
+byts := []bytes(stra)
+strb := string(byts)
+```
+In fact, this way of converting is common across various types as well. Some functions explicitly expect and int32 or int64 or their unsigned
+counterparts. You might find yourself having to do something like this:
+```golang
+int64(count)
+```
+### Function Type
+Functions are first-class types: 
+```golang
+type Add func(a int, b int) int
+// which can be used anywhere - as a field type, param or a return val
+
+package main
+import (
+	"fmt"
+)
+
+func main() {
+	fmt.Println(process(func(a int, b int) int {
+		return a + b
+	}))
+}
+
+func process(adder Add) int {
+	return adder(1,2)
+}
+// Using functions like this can help decouple code from specific implementations much like we achieve with interfaces
+```
+
+# Concurrency
+### Goroutines
+
+A goroutine is similar to a thread, but it is scheduled by `Go` not the OS. Code that runs in a goroutine can run in concurrency with other code
+
+```golang
+package main
+
+import(
+	"fmt"
+	"time"
+)
+
+func main() {
+	fmt.Println("start")
+	go process()
+	time.Sleep(time.Millisecond * 10) // this is bad do not do this
+	fmt.Println("done"
+}
+
+func process() {
+	fmt.Println("processing")
+}
+/* There are a few interesting things here but the most important is how we start a goroutine. We simply use the go keyword followed by the function
+we want to execute. If we just want to run a bit of code, such as the above, we can use an anonymous function. Do not that anon funcs are not only
+used with goroutines however.
+go func() {
+	fmt.Println("processing")	
+}()
+Goroutines are easy to create and have little overhead. Multiple goroutines end up running on the same underlying OS thread. This is often called M:N
+threading model because we have M applications threads(goroutines) running on N OS threads. 
+/*
+```
+
+
