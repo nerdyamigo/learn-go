@@ -259,8 +259,31 @@ originalPokedex := make([]int, 0, 151) // slice with the length of 0 but
 ```
 ### Four ways to initialize a s slice
 ```golang
+// here we know what is going into the slice
 name := []string{"pikachu", "bulbasor", "charmeleon"}
+// here we create a slice with the length & capacity ot 10
 checks := make([]bool, 10)
+// this is a slice that has not been initialize nor does it have a specific size || cap
 var name []string
+// here we declare a slice with a specific length and capacity
 hp := make([]int, 0, 99)
+
+// Example when writting into specific indexes of a slice
+// here we loop all the pokemons and extract only the data we need
+func extractNames (pokemons []*Pokemons) []string {
+	names := make ([]string, len(pokemons))
+	for index, pokemon := range pokemons {
+		names[index] = pokemon.Name
+	}
+	return names
+}
+// we can use a nil slice when the number of elemensts is unkown
+// let's refactor our last function to use it with append
+func extractNames (pokemons, []*Pokemons) []string {
+	names := make([]string, 0, len(pokemons))
+	for _, pokemon := range pokemons {
+		names = append(names, pokemon.Names)
+	}
+	return names
+}
 ```
