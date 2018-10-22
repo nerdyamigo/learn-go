@@ -387,3 +387,79 @@ type FileLogger struct {...}
 ```
 
 `@TODO LOOK UP HOW TO IMPLEMENT AND HOW TO USE INTERFACES IN GO`
+
+How would you use an `interface`?
+```golang
+// it could be a structs field
+type Server struct {
+	logger Logger
+}
+// or a function param
+func process(logger Logger) {
+	logger.Log("hello!")
+}
+```
+### Error Handling
+Go's preferred way to deal with errors is through return values, not exceptions. 
+```golang
+// let's consider strconv.Atoi
+package main
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
+
+func main() {
+	if len(os.Args) != 2 {
+		os.Exit(1)
+	}
+
+	n, err := strconv.Atoi(os.Args[1])
+	if err != nil {
+		fmt.Println("not a valid number")
+	} else {
+		fmt.Println(n)
+	}
+}
+// create your own error type; the only requirement is that it fulfills the built-in `error` interface
+type error interface {
+	Error() string
+}
+// more commonly we can create our own errors by importing the errors package and using it in the New function
+
+import (
+	"errors"
+)
+
+func process(count int) error {
+	if count < 1 {
+		return errors.New("Invalid Count")
+	}
+	// some code here
+	return nil
+}
+```
+### Defer
+Even though Go has a garbage collector, some resources required that we explicitly release them. For example we need to `Close()` files after we're
+done with them. This sort of code is always dangerous. For one thing, as we're writting a function, it's easy to forget to Close something we declared
+10 lines up, Go's solutions for this is the `defer` keyword
+```golang
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	file, err := os.Open("a_file_to_read")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer file.Close()
+	// read file here
+}
+
+```

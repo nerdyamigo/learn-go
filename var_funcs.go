@@ -6,7 +6,7 @@ import (
 
 func main() {
 	power := getPower()
-	fmt.Printf("Look! It's over %d!!!\n", power);
+	fmt.Printf("Look! It's over %d!!!\n", power)
 }
 
 func getPower() int {
