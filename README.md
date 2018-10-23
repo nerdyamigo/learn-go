@@ -51,6 +51,16 @@ A `numeric` type represents sets of `integer` or `floating-point` values. The pr
 | complex128 | the set of all complex numbers with float64 real and imaginary parts | 
 | byte | alias for uint8 | 
 |rune | alias for int32 | 
+
+The value of an `n-integer` is `n` bits wide and represented using `two's complement arithmetic`
+There is also a set of predeclared numeric types with implementation-specific sizes
+
+#### String Types
+A `string` type represents the set of string values. A string value is a sequence of bytes. Strings are immutable, `once created it is impossible to
+change the contents of a string`.
+The length of a string `s` can be discovered using the built-in function `len`. The length is
+a compile-time constant if the string is a constant. A string's bytes can be accessed by integer `indices` 0 through `len(s)-1`. It is illegal to take
+the address of such element; if `s[i]` is the i'th byte of a string, `&s[i]` is invalid.
 ### Function Declarations
 Functions can return multiple values, let's look at a few
 ```golang
