@@ -601,3 +601,45 @@ VAR := <-CHANNEL
 // The arrow points in the direction the data flows. When sending, the data flows into the channel
 // When receiving the data flows out of the channel
 ```
+One more thing to know is that receiving and sending from a channel is blocking. That is when we receive from a channel, execution of the goroutine
+won't continue until the data is received
+```golang
+type Worker struct {
+	id int
+}
+
+func (w Worker) process(c chan int) {
+	for {
+		data := <-c
+		fmt.Printf("worker %d got %d\n", w.id, data)
+	}
+}
+
+c := make(chan int)
+for i := 0; i < 4; i++ {
+	worker := Worker{id: i}
+	go worker.process(c)
+}
+// give them some work
+for {
+	c <- rand.Int()
+	time.Sleep(time.Millisecond * 50)
+}
+```
+We don't know which worker is going to get what data. What we do know, what Go gurantees is that the data we send to a channel will only be received
+by s single receiver.
+
+#### Buffered Channels
+What happends if we have more data coming in that we can handle?
+
+In cases where you need high gurantees that the data is being processed, you probably will want to start blocking the client. In other cases,  you
+might be willing to loosen those gurantees. 
+The first way to do this is to buffer the data. If no worker is available, we want to temporarily store the data in some sort of queue. Channels have
+this buffering capability built in. Wehen we created our channel with make, we can give our channel a length: 
+```golang
+c := make(chan int, 100)
+```
+However buffer channels do not add more capacity; they merely provide a queue for pending work and a good way to deal with a sudden spike. 
+#### Select
+Evem with buffering, there comes a popint where we need to start dropping messages. For this we can use `select`
+Syntastically `select` looks like a switch. With it we can provide code for when the channel is not available to send to
