@@ -32,7 +32,7 @@ Each `type T` has an underlying type: If T is one of the predeclared boolean, nu
 underlying type is T itself. 
 #### Boolean Types
 A `boolean` type represents the set of `Boolean` truth values denoted by the predeclared constants `true` and `false`. The predeclared `boolean` type is `bool`
-### Numeric Types
+#### Numeric Types
 A `numeric` type represents sets of `integer` or `floating-point` values. The predeclared architecture-independent numer types are:
 
 | Numeric Types | Description |
@@ -61,6 +61,172 @@ change the contents of a string`.
 The length of a string `s` can be discovered using the built-in function `len`. The length is
 a compile-time constant if the string is a constant. A string's bytes can be accessed by integer `indices` 0 through `len(s)-1`. It is illegal to take
 the address of such element; if `s[i]` is the i'th byte of a string, `&s[i]` is invalid.
+
+#### Array Types
+An `array` is a numbered sequence of elements of a single type, called the element type. The number of elements is called the length and is never
+negative
+
+The length is part of the `array` type; it must evaluate to a non-negative constant representable by a value of type `int`. The length of an array can
+be discovered using the built-in function `len`. The elements can be addressed by ineteger indices 0 through `len(a)-1`. Array types are always
+one-dimensional but may be composed to form multi-dimensional types
+
+#### Slice Types
+A `slice` is a descriptor for a contigous segment of an `underlying array` and provides access to a numbered sequence of elements from that array. A
+`slice` type denotes the set of all slices of arrays of its element type. The value of an unitialized `slice` is `nil`
+```golang
+SliceType = "[" "]" ElementType
+```
+Like arrays slices are indexable and have a length. The length of `slice s` can be discovered by the built-in `len` function; unlike arrays it may
+change during execution. The elemsts can be addressed by integer indices 0 through `len(s)-1`. The slice index of a given element may be less than the
+index of the same element in the underlying array 
+
+A slice once initialized is always associated with an underlying array that holds its elements. A slice therefore shares storage with its array and
+with other slices of the same array; by contrast, distinct arrays always represent distinct storage.
+
+The array underlying a slice may extend past tghe end of the slice. The `capacity` is a mersure of that extent: it is the sum of the length of the
+slice and the length of the the array beyond the slice; a slice of length up to that capacity can be created by `slicing` a new one from the original
+slice. The `capacity` of a slice can be discovered using the built-in funtion `cap(a)`.
+
+A new, initialized slice value for a given element type T is made using the built-in function `make`, which takes a slice type and parameters
+speciifying the length and optionally the cap. A slide created with the `make` keyword always allocates a new, hidden array to which the returned
+slice value refers
+```golang
+make([]int, 50, 100)
+new([100]int)[0:50]
+```
+Like arrays, slices are always one-dimensional but may be composed to construct higher-dimensional objects. 
+
+#### Struct Types 
+A `struct` is a sequence of named elements, called fields, each of which has a name and a type. Field names may be specified
+explicitly(IdentifierList) or implicitly(EmbeddedField). Within a struct non-blank field names must be unique
+```golang
+// empty struct
+struct {}
+
+// a struct with 6 fields
+struct {
+	x,y int
+	u float32
+	_ float32 // padding
+	A *[]int
+	F func()
+}
+```
+A field declared with a type but not explicit fieldname is called an `embedded field`. An embedded field must be specified as a type T or as a pointer
+to a non-interface type name *T and T itself may not be a pointer type. The unqualified type name acts as a field name
+```golang
+// struct with 4 embedded fields of types: T1, *T2, P.T3 and *P.T4
+struct {
+	T1		// fieldname is T1
+	*T2		// fieldname is *T2
+	P.T3	// fieldname is T3
+	*P.T4	// fieldname is T4
+	x,y int	// fieldnames are x and y
+}
+```
+The following declaration is illegal becase field names must be unique in a struct type
+```golang
+struct {
+	T			// conflicts with embedded field *T and *P.T
+	*T		// conflicts with embedded field *T and *P.T
+	*P.T	// conflicts with embedded field T and *T
+}
+```
+A field or method `f` of an embedded field in a struct `x` is called `promoted` if `x.f` is a legal selector that denotes that field of method`f`
+
+##### Promoted Fields
+Promoted fields act like ordinary fields of a struct except that they cannot be used as fieldnames in composite literals of the struct
+
+Given a struct type S and a defined type T, promoted methods are included in the method set of the struct as follows
+	* If `S` contains an embedded field T, the method sets of `S` and `*S` both include promoted methods with receiver T. The method of set `*S` also
+	  includes promoted methods with receiver *T.
+	* If `S` contains an embedded method field `*T`, the method sets of `S` and `*S` both include promoted methods with receiver `T` or `*T`
+
+A field declaration may be followed by an optional string literla tag, which becomes an attribute for all the fields in the corresponding field
+declaration. An empty tag string is equivalent to an absent tag. The tags are made visible trough a `reflection interface` and take part in `type
+identity` for structs but are otherwise ignored
+
+#### Pointer Types
+A pointer denotes the set of all pointers to variables of a given type, called the `base type` of the pointer. The value of uninitialized pointter is
+nil
+```golang
+PointerType = "*"BaseType .
+BaseType = Type .
+
+*Point
+*[4]int
+```
+
+### Function Types
+A function type denotes the set of all functions with the same parameter and result types. The value of an unitialize varibale of function type is nil
+
+### Interface Types
+An interface type specifies a method set called its interfaces. A variable of interface type can store a value of any type with a method set that is
+any superset of the interface. Such a type is said to `implement the interface`. The value of an unitialized variable of interface type is nil
+
+As with all method sets, in an interface type, each method must have a unique non-blank name.
+More than one type may implement an interface. For instance if two types S1 and S2 have the method set
+```golang
+func (p T) Read(b Buffer) bool {return ...}
+func (p T) Write(b Buffer) bool {return ...}
+func (p T) Close() {...}
+// Where T stands for either S1 || S2 then the file interface is implemented by both S1 and S2, regardless of what other methods S2 and S2 may have or
+share
+```
+A type implements any interface comprising any subset of its methods and may therefore impement distinct interfaces. For isntance all types
+implement the empty interface
+```golang
+interface{}
+```
+An interface T may use a interface type name E in place of a method specification. This is called embedding interface E in T; it adds all methods of E
+to the interface T
+```golang
+type ReadWrite interface {
+	Read(b Buffer) bool
+	Write(b Buffer) bool
+}
+
+type File interface {
+	ReadWrite	// same as adding the methods from ReadWrite
+	Locker		// same as adding the methods from Locker
+	Close()
+}
+
+type LockedFile interface {
+	Locker
+	File	// illegal: Lock, Unlock Unlock not unique
+	Lock()// illegal: Lock not unique
+}
+```
+An interface type T may not embed itself or any interface type that embeds T recursively
+
+### Map Types
+A `map` is an unordered group of elements of one type, called the element type, indexed by a set of unique keys of another type, called the key type.
+The value of an unitialized map is `nil`
+
+The comparison ops `==` & `!=` must be fully defined for operands of the key type; thus the key type must not be a function, map, or slice. If the
+key type is an interface type, these comparison operators must be defined for the dynamic key values; failure will cause a run-time panic
+```golang
+map[string]int
+map[*T]struct{x,y float64}
+map[string]interface{}
+```
+The number of map elements is called its length. For map `m` it can be discovered using the built-in function `len` and may change during execution.
+Elements may be added during execution using assignments and retrieved with index expressions; they may be removed using the `delete` built-in
+function
+
+A new empty map value is made using the built-in `make`, which takes the map type and an optional capacity hint as args
+```golang
+make(map[string]int)
+make(map[string]int, 100)
+```
+The initial cap does not bound its size; maps grow to accomodate the number of items stored in them, with the exception of nil maps. A nil map is
+equivalent to an empty map except that no elemets may be added
+
+### Channel Type
+A `channel` type provides a mechanism for concurrently executing functions to communicate by sending and receiving values of a specified element type.
+The value of an unitilized channel is nil
+
 ### Function Declarations
 Functions can return multiple values, let's look at a few
 ```golang
