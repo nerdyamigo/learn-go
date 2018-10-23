@@ -34,7 +34,7 @@ underlying type is T itself.
 A `boolean` type represents the set of `Boolean` truth values denoted by the predeclared constants `true` and `false`. The predeclared `boolean` type is `bool`
 ### Numeric Types
 A `numeric` type represents sets of `integer` or `floating-point` values. The predeclared architecture-independent numer types are:
-|Numeric Types | Description
+| Numeric Types | Description |
 |---|---|
 |unit8| the set of all unsigned 8bit integers (0-255)|
 |unit16 | the set of all the unsigned 16bit integers (0-65535)|
