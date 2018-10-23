@@ -544,5 +544,60 @@ Goroutines are easy to create and have little overhead. Multiple goroutines end 
 threading model because we have M applications threads(goroutines) running on N OS threads. 
 /*
 ```
+### Synchronization
+Creating goroutines is trivial, and they are so cheap that we can start many; however concurrent code needs to be coordinated. To help with this
+problem, Go provides `channels`.
+##### Concurrent Programming
+Writing concurrent code requires that you pay specific attention to where and how you read and write values. In some ways, it's like programming
+without a garbage collector - it requires that you think about your data from a new angle, always watchful for possible danger, condifer:
+```golang
+package main
 
+import (
+	"fmt"
+	"time"
+)
 
+var counter = 0
+
+func main() {
+	for i := 0; i < 20; i++ {
+		go incr()
+	}
+	time.Sleep(time.Millisecond * 10) 
+}
+
+func incr() {
+	counter++
+	fmt.Println(counter)
+}
+```
+What do you think will happen above?
+The behavior is actually undefined, because we potentially have multiple(two in this case) goroutines writting to the same variable, `counter` at the
+same time. Ot just as bad one goroutine would be reading `counter` while another writes to it
+
+Is it really that bad?
+Yes, `counter++` might seem like a simple line of code, but it actually gets broken down into multiple assembly statements - the exact number depends
+on the platform you are running it. If you run this example you'll see very often the numbers are printed in weird order and/or numbers are
+duplicated/missings. 
+### Channels
+The challenge with concurrent programming stems from sharing data. If your goroutines share no data you needn't worry about synchronizing them. 
+Channels help make concurrent programming saner by taking shared data out of the picture. A channel is a communication pipe between goroutines which
+is used to passed data. In othwr words a goroutine that has data can pass it to anothwr goroutine via a channel. The result is that at any point in
+time only one goroutine has access to the data
+
+A channel like everything else has a typ. This is the type of data that we'll be passing though our channel. 
+```golang
+// create a channel which can be used to pass an integer around
+c := make(chan int)
+// The type of this channel is chan int. Therefore, to pass this chanel to a function, our signature looks like 
+func worker(c chan int) {
+	// code goes here 
+}
+// Channels support two ops: receiving and sending. We send to a channel by doing:
+CHANNEL <- DATA
+// and we receive from one by doing
+VAR := <-CHANNEL
+// The arrow points in the direction the data flows. When sending, the data flows into the channel
+// When receiving the data flows out of the channel
+```
