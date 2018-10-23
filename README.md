@@ -22,14 +22,25 @@ name := "MyName"
 var str string
 ```
 ### Types
+
 A `type` determines a set of values together with operations and methods specific to those values. A type may be denoted by a `type` name, if it has
 one or specified  by a `type literal`, which composes a type from existing types
-|
-|_________|___________|____________|
-|Type			|	TypeLit		| "(" Type ")"
-|TypeName	| identifier|	QualifiedIndent
-|TypeLit	| ArrayType	| StructType	| PointerType	| FunctionType	| InterfaceType	| SliceType
-MapType	| ChannelType	|
+The language predeclares certain type names. Composite types - array,struct,pointer,function,interface,slice,map,and channel types-- may be
+constructed using `type literals`
+
+Each `type T` has an underlying type: If T is one of the predeclared boolean, numeric, or string types, or a type literal, the corresponding
+underlying type is T itself. 
+#### Boolean Types
+A `boolean` type represents the set of `Boolean` truth values denoted by the predeclared constants `true` and `false`. The predeclared `boolean` type is `bool`
+### Numeric Types
+A `numeric` type represents sets of `integer` or `floating-point` values. The predeclared architecture-independent numer types are:
+|Numeric Types | Description
+|---|---|
+|unit8| the set of all unsigned 8bit integers (0-255)|
+|unit16 | the set of all the unsigned 16bit integers (0-65535)|
+|unit32| the set of all the unsigned 32bit integers (0-4294967295)|
+|unit64| the set of all the unsignes 64bit integers (0 -18446744073709551615)|
+
 ### Function Declarations
 Functions can return multiple values, let's look at a few
 ```golang
