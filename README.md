@@ -21,6 +21,13 @@ name := "MyName"
 // we can set the var without data and go will set it to 0 || "" | false
 var str string
 ```
+### Types
+A `type` determines a set of values together with operations and methods specific to those values. A type may be denoted by a `type` name, if it has
+one or specified  by a `type literal`, which composes a type from existing types
+|Type			|	TypeLit		| "(" Type ")"
+|TypeName	| identifier|	QualifiedIndent
+|TypeLit	| ArrayType	| StructType	| PointerType	| FunctionType	| InterfaceType	| SliceType
+MapType	| ChannelType	|
 ### Function Declarations
 Functions can return multiple values, let's look at a few
 ```golang
