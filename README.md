@@ -41,7 +41,16 @@ A `numeric` type represents sets of `integer` or `floating-point` values. The pr
 | unit16 | the set of all the unsigned 16bit integers (0-65535) |
 | unit32 | the set of all the unsigned 32bit integers (0-4294967295) |
 | unit64 | the set of all the unsignes 64bit integers (0 -18446744073709551615) |
-
+| int8 | the set of all the signed 8bit integers (-128-127) |
+| int16 | the set of all the signed 16bit integers (-32768 to 32767) | 
+| int32 | the set of all the signed 32bit integers (-2147483648 to 2147483647) |
+| int64 | the set of all the signed 64 bit integers (-9223372036854775808 to 9223372036854775807) |
+| float32 | the set of all IEEE-754 32-bit floating-point numbers | 
+| float64 | the set of all IEEE-754 64-bit floating-point numbers | 
+| complex64 | the set of all complex numbers with float32 real and imaginary parts |
+| complex128 | the set of all complex numbers with float64 real and imaginary parts | 
+| byte | alias for uint8 | 
+|rune | alias for int32 | 
 ### Function Declarations
 Functions can return multiple values, let's look at a few
 ```golang
