@@ -8,4 +8,5 @@ Network communications required protocols to cover high-level application commun
 handled by encapsulation in protocol layers
 
 #### Open Systems Interconnect
+OSI Layers:
 

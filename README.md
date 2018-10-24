@@ -9,6 +9,22 @@ Also started using the [excercism.io](https://exercism.io/tracks/go) for Golang
 
 
 ### Go Basics
+### Packages
+Every Go program is made up of `packages`.
+Programs start running in the package `main`.
+By convention, the package name is the same as the last element of the import path. For instance, the `"math/rand"` package comprises files that begin
+with the statement `package rand`.
+
+### Imports
+This code groups the imports into a parenthisized "factored" import statement. 
+You can also write multiple import statements like: 
+`import "fmt"`
+`import "math"`
+
+### Exported Names
+In Go a name is exported ig it begins with a `capital letter` using `lowercase letteer` will make it be ony usable inside the package but not outside
+of it
+
 Primitive types in Golang
 ```golang
 // string, numeric type, bool, error
