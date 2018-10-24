@@ -25,7 +25,7 @@ You can also write multiple import statements like:
 In Go a name is exported ig it begins with a `capital letter` using `lowercase letteer` will make it be ony usable inside the package but not outside
 of it
 
-Primitive types in Golang
+### Primitive types in Golang
 ```golang
 // string, numeric type, bool, error
 ```
@@ -271,6 +271,16 @@ was sent before the channel was closed.
 A single channel may be used in send statements, receive operations, and calls to the built-in functions `cap` and `len` by any number of goroutines
 without further synchronization. Channels act as first-in-first-out queues. For example if one goroutine sends values on a channel and a second
 goroutine receives them, the values are received in the order sent.
+
+### Type Conversions
+The expression `T(v)` convertes the value `v` to type `T`
+```golang
+// Some numeric conversion
+var i int = 42
+var f float64 = float64(i);
+var u uint = uint(f)
+``` 
+Unlike in C, in Go assignment between different items of different type requires an explicit converision. 
 
 ### Function Declarations
 Functions can return multiple values, let's look at a few
